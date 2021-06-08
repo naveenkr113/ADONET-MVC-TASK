@@ -19,7 +19,7 @@ namespace DDONET_MVC_TASK.DAL
                 {
                     con.Open();
                 }
-                SqlCommand cmd = new SqlCommand("select fst_nam,lst_nam,cpny, prf_nam from tbl_Contacts,tbl_Profession where tbl_Contacts.prf_id = tbl_Profession.prf_id", con);
+                SqlCommand cmd = new SqlCommand("select fst_nam,lst_nam,cpny, prf_nam, cnt_id from tbl_Contacts,tbl_Profession where tbl_Contacts.prf_id = tbl_Profession.prf_id", con);
                 SqlDataReader dr = cmd.ExecuteReader();
                 List<Combine> obj = new List<Combine>();
                 while (dr.Read())
@@ -31,6 +31,7 @@ namespace DDONET_MVC_TASK.DAL
                  cont.lst_nam  = dr[1].ToString();
                  cont.cpny = dr[2].ToString();
                    prof.prf_nam = dr[3].ToString();
+                cont.cnt_id = Convert.ToInt32(dr[4]);
                 ab.contacts = cont;
                 ab.profession = prof;
                 obj.Add(ab);
@@ -78,6 +79,46 @@ namespace DDONET_MVC_TASK.DAL
             cmd.Parameters.AddWithValue("lstnam", cont.lst_nam);
             cmd.Parameters.AddWithValue("cpny", cont.cpny);
             cmd.Parameters.AddWithValue("prfid", cont.prof_id);
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            con.Close();
+        }
+
+        public Contacts Find_Rec(int id)
+        {
+            if(con.State== ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand cmd = new SqlCommand("select*from tbl_Contacts where cnt_id=@cntid", con);
+            cmd.Parameters.AddWithValue("@cntid", id);
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+            dr.Read();
+            Contacts obj = new Contacts();
+            obj.cnt_id = Convert.ToInt32(dr[0]);
+            obj.fst_nam = dr[1].ToString();
+            obj.lst_nam = dr[2].ToString();
+            obj.cpny= dr[3].ToString();
+            obj.prof_id = Convert.ToInt32(dr[4]);
+            cmd.Dispose();
+            con.Close();
+            return obj;
+        }
+        public void Update_Rec(Contacts cont)
+        {
+            if(con.State== ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand cmd = new SqlCommand("update tbl_Contacts set fst_nam=@fstnam, lst_nam=@lstnam, cpny=@cpny, prf_id= @prfid where cnt_id=@cntid", con);
+
+            cmd.Parameters.AddWithValue("@fstnam", cont.fst_nam);
+            cmd.Parameters.AddWithValue("@lstnam", cont.lst_nam);
+            cmd.Parameters.AddWithValue("@cpny", cont.cpny);
+            cmd.Parameters.AddWithValue("@prfid", cont.prof_id);
+            cmd.Parameters.AddWithValue("@cntid", cont.cnt_id);
+
             cmd.ExecuteNonQuery();
             cmd.Dispose();
             con.Close();

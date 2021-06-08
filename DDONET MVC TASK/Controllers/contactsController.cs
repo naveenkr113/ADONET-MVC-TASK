@@ -55,23 +55,30 @@ namespace DDONET_MVC_TASK.Controllers
         // GET: contacts/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+           var aaa= rep.Find_Rec(id);    
+            var aa = rep.prof();
+            ViewBag.ProfessionList = new SelectList(aa, "prf_id", "prf_nam");
+            return View(aaa);
         }
 
         // POST: contacts/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Contacts cont)
         {
             try
             {
-                // TODO: Add update logic here
+
+                rep.Update_Rec(cont);
 
                 return RedirectToAction("Index");
             }
             catch
             {
+                var aa = rep.prof();
+                ViewBag.ProfessionList = new SelectList(aa, "prf_id", "prf_nam");
                 return View();
             }
+
         }
 
         // GET: contacts/Delete/5
