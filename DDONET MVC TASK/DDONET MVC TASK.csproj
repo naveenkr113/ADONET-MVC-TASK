@@ -177,6 +177,8 @@
     <Content Include="Views\contacts\Index.cshtml" />
     <Content Include="Views\contacts\Create.cshtml" />
     <Content Include="Views\contacts\Edit.cshtml" />
+    <Content Include="Views\contacts\Delete.cshtml" />
+    <Content Include="Views\contacts\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

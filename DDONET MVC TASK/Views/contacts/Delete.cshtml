@@ -1,0 +1,64 @@
+﻿@model DDONET_MVC_TASK.Models.Combine
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Combine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.contacts.cnt_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contacts.cnt_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contacts.fst_nam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contacts.fst_nam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contacts.lst_nam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contacts.lst_nam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contacts.cpny)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contacts.cpny)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.profession.prf_nam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.profession.prf_nam)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

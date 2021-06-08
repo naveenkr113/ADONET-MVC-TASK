@@ -21,8 +21,8 @@ namespace DDONET_MVC_TASK.Controllers
         // GET: contacts/Details/5
         public ActionResult Details(int id)
         {
-
-            return View();
+            var aaa = rep.Detail_Rec(id);
+            return View(aaa);
         }
 
         // GET: contacts/Create
@@ -84,7 +84,8 @@ namespace DDONET_MVC_TASK.Controllers
         // GET: contacts/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var aaa = rep.Detail_Rec(id);
+            return View(aaa);
         }
 
         // POST: contacts/Delete/5
@@ -93,7 +94,7 @@ namespace DDONET_MVC_TASK.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                rep.Delete_rec(id);
 
                 return RedirectToAction("Index");
             }

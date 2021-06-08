@@ -123,5 +123,45 @@ namespace DDONET_MVC_TASK.DAL
             cmd.Dispose();
             con.Close();
         }
+
+        public void Delete_rec( int id)
+        {
+            if(con.State== ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand cmd = new SqlCommand("delete from tbl_Contacts where cnt_id=@cntid",con);
+            cmd.Parameters.AddWithValue("cntid", id);
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            con.Close();
+        }
+
+        public Combine Detail_Rec(int id)
+        {
+            if(con.State== ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand cmd = new SqlCommand("select cnt_id,fst_nam, lst_nam, cpny, prf_nam from tbl_Contacts, tbl_Profession where tbl_Contacts.prf_id=tbl_Profession.prf_id and cnt_id=@cntid",con);
+            cmd.Parameters.AddWithValue("cntid", id);
+            SqlDataReader dr = cmd.ExecuteReader();
+            Combine obj = new Combine();
+            Contacts cont = new Contacts();
+            Profession prof = new Profession();
+            dr.Read();
+            cont.cnt_id= Convert.ToInt32 (dr[0]);
+            cont.fst_nam = dr[1].ToString();
+            cont.lst_nam = dr[2].ToString();
+            cont.cpny = dr[3].ToString();
+            prof.prf_nam = dr[4].ToString();
+            obj.contacts = cont;
+            obj.profession = prof;
+            cmd.Dispose();
+            dr.Close();
+            con.Close();
+            return (obj);
+        }
+
     }
 }

@@ -1,0 +1,56 @@
+﻿@model DDONET_MVC_TASK.Models.Combine
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Combine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.contacts.cnt_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contacts.cnt_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contacts.fst_nam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contacts.fst_nam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contacts.lst_nam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contacts.lst_nam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contacts.cpny)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contacts.cpny)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.profession.prf_nam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.profession.prf_nam)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
