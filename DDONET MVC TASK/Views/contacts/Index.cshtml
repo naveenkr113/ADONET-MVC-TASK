@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DDONET_MVC_TASK.Models.Combine>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.contacts.fst_nam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.contacts.lst_nam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.contacts.cpny)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.profession.prf_nam)
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.contacts.fst_nam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contacts.fst_nam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contacts.cpny)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.profession.prf_nam)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
