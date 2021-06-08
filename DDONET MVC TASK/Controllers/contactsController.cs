@@ -45,8 +45,11 @@ namespace DDONET_MVC_TASK.Controllers
             }
             catch
             {
+                var aa = rep.prof();
+                ViewBag.ProfessionList = new SelectList(aa, "prf_id", "prf_nam");
                 return View();
             }
+ 
         }
 
         // GET: contacts/Edit/5

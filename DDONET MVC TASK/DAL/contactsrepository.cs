@@ -72,11 +72,12 @@ namespace DDONET_MVC_TASK.DAL
             {
                 con.Open();
             }
-            SqlCommand cmd = new SqlCommand("insert into tbl_Contacts where cnt_id=@cntid, fst_nam=@fstnam, lst_nam=@lstnam, cpny=@cpny, prof_id=@profid ");
-            cmd.Parameters.AddWithValue("fstnam", cont.cnt_id);
+            SqlCommand cmd = new SqlCommand("insert tbl_Contacts values( @cntid, @fstnam, @lstnam, @cpny, @prfid)", con);
+            cmd.Parameters.AddWithValue("cntid", cont.cnt_id);
+            cmd.Parameters.AddWithValue("fstnam", cont.fst_nam);
             cmd.Parameters.AddWithValue("lstnam", cont.lst_nam);
-            cmd.Parameters.AddWithValue("ccpny", cont.cpny);
-            cmd.Parameters.AddWithValue("profid", cont.prof_id);
+            cmd.Parameters.AddWithValue("cpny", cont.cpny);
+            cmd.Parameters.AddWithValue("prfid", cont.prof_id);
             cmd.ExecuteNonQuery();
             cmd.Dispose();
             con.Close();
