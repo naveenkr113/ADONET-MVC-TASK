@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DDONET_MVC_TASK.DAL;
+using DDONET_MVC_TASK.Models;
 
 namespace DDONET_MVC_TASK.Controllers
 {
@@ -20,23 +21,26 @@ namespace DDONET_MVC_TASK.Controllers
         // GET: contacts/Details/5
         public ActionResult Details(int id)
         {
+
             return View();
         }
 
         // GET: contacts/Create
         public ActionResult Create()
         {
+            var aa = rep.prof();
+            ViewBag.ProfessionList = new SelectList(aa, "prf_id", "prf_nam");
             return View();
+            
         }
 
         // POST: contacts/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Contacts cont)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                rep.Create_Rec(cont);
                 return RedirectToAction("Index");
             }
             catch
