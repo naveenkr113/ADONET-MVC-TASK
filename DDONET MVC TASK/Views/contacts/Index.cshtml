@@ -1,4 +1,7 @@
-﻿@model IEnumerable<DDONET_MVC_TASK.Models.Combine>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model  IPagedList<DDONET_MVC_TASK.Models.Combine>
+
 
 @{
     ViewBag.Title = "Index";
@@ -9,41 +12,50 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<p>
+    @using (@Html.BeginForm("index", "contacts", FormMethod.Get)) {
+    <b> Search By:</b>@Html.RadioButton("SearchBy", "fst_nam", true) <text>Fist Name</text>
+    @Html.RadioButton("SearchBy", "prf_nam") <text>Profession Name</text> <br />
+    @Html.TextBox("Search") <input type="submit" value="search">
+    }
+</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.contacts.fst_nam)
+            @Html.DisplayNameFor(model => model.First().contacts.fst_nam)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.contacts.lst_nam)
+            @Html.DisplayNameFor(model => model.First().contacts.fst_nam)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.contacts.cpny)
+            @Html.DisplayNameFor(model => model.First().contacts.cpny)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.profession.prf_nam)
+            @Html.DisplayNameFor(model => model.First().profession.prf_nam)
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.contacts.fst_nam)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.contacts.lst_nam)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.contacts.cpny)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.profession.prf_nam)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.contacts.cnt_id}) |
-            @Html.ActionLink("Details", "Details", new { id = item.contacts.cnt_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.contacts.cnt_id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.contacts.fst_nam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contacts.lst_nam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contacts.cpny)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.profession.prf_nam)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.contacts.cnt_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.contacts.cnt_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.contacts.cnt_id })
+            </td>
+        </tr>
+    }
 
 </table>
+@Html.PagedListPager(Model, page=> Url.Action("Index", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation=true })

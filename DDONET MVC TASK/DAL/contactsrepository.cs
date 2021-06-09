@@ -163,5 +163,72 @@ namespace DDONET_MVC_TASK.DAL
             return (obj);
         }
 
+        public List<Combine> Disp_Rec_filtbynam(string search)
+
+        {
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand cmd = new SqlCommand("select fst_nam,lst_nam,cpny, prf_nam, cnt_id from tbl_Contacts,tbl_Profession where tbl_Contacts.prf_id = tbl_Profession.prf_id and fst_nam LIKE @fstnam", con);
+            cmd.Parameters.AddWithValue("fstnam", search);
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<Combine> obj = new List<Combine>();
+            while (dr.Read())
+            {
+                Combine ab = new Combine();
+                Contacts cont = new Contacts();
+                Profession prof = new Profession();
+                cont.fst_nam = dr[0].ToString();
+                cont.lst_nam = dr[1].ToString();
+                cont.cpny = dr[2].ToString();
+                prof.prf_nam = dr[3].ToString();
+                cont.cnt_id = Convert.ToInt32(dr[4]);
+                ab.contacts = cont;
+                ab.profession = prof;
+                obj.Add(ab);
+
+            }
+
+
+            dr.Close();
+            cmd.Dispose();
+            con.Close();
+            return obj;
+        }
+        public List<Combine> Disp_Rec_filtbyprfnam(string search)
+
+        {
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand cmd = new SqlCommand("select fst_nam,lst_nam,cpny, prf_nam, cnt_id from tbl_Contacts,tbl_Profession where tbl_Contacts.prf_id = tbl_Profession.prf_id and prf_nam like @prfnam", con);
+            cmd.Parameters.AddWithValue("prfnam", search);
+            SqlDataReader dr = cmd.ExecuteReader();
+            List<Combine> obj = new List<Combine>();
+            while (dr.Read())
+            {
+                Combine ab = new Combine();
+                Contacts cont = new Contacts();
+                Profession prof = new Profession();
+                cont.fst_nam = dr[0].ToString();
+                cont.lst_nam = dr[1].ToString();
+                cont.cpny = dr[2].ToString();
+                prof.prf_nam = dr[3].ToString();
+                cont.cnt_id = Convert.ToInt32(dr[4]);
+                ab.contacts = cont;
+                ab.profession = prof;
+                obj.Add(ab);
+
+            }
+
+
+            dr.Close();
+            cmd.Dispose();
+            con.Close();
+            return obj;
+        }
+
     }
 }

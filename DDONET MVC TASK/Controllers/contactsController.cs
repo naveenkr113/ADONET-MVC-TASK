@@ -5,19 +5,40 @@ using System.Web;
 using System.Web.Mvc;
 using DDONET_MVC_TASK.DAL;
 using DDONET_MVC_TASK.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace DDONET_MVC_TASK.Controllers
 {
     public class contactsController : Controller
     {
-        contactsrepository rep = new contactsrepository();    
-        // GET: contacts
-        public ActionResult Index()
+        contactsrepository rep = new contactsrepository();
+        /* GET: contacts
+        public ActionResult Index(int? page)
         {
             var aa= rep.Disp_Rec();
-            return View(aa);
-        }
+            return View(aa.ToList().ToPagedList(page ?? 1, 5));
+        } */
+        [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get)]
+        public ActionResult Index(string searchBy, string search, int? page)
+        {
+            if (searchBy == "fst_nam")
+            {
+                var aa = rep.Disp_Rec_filtbynam(search);
+                return View(aa.ToList().ToPagedList(page ?? 1, 5));
 
+            }
+            else if (searchBy == "prf_nam")
+            {
+                var aa = rep.Disp_Rec_filtbyprfnam(search);
+                return View(aa.ToList().ToPagedList(page ?? 1, 5));
+            }
+            else
+            {
+                var aa = rep.Disp_Rec();
+                return View(aa.ToList().ToPagedList(page ?? 1, 5));
+            }
+        }
         // GET: contacts/Details/5
         public ActionResult Details(int id)
         {
