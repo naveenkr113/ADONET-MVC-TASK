@@ -170,7 +170,7 @@ namespace DDONET_MVC_TASK.DAL
             {
                 con.Open();
             }
-            SqlCommand cmd = new SqlCommand("select fst_nam,lst_nam,cpny, prf_nam, cnt_id from tbl_Contacts,tbl_Profession where tbl_Contacts.prf_id = tbl_Profession.prf_id and fst_nam LIKE @fstnam", con);
+            SqlCommand cmd = new SqlCommand("select fst_nam,lst_nam,cpny, prf_nam, cnt_id from tbl_Contacts,tbl_Profession where tbl_Contacts.prf_id = tbl_Profession.prf_id and fst_nam LIKE '%'+ @fstnam + '%'", con);
             cmd.Parameters.AddWithValue("fstnam", search);
             SqlDataReader dr = cmd.ExecuteReader();
             List<Combine> obj = new List<Combine>();
@@ -203,7 +203,7 @@ namespace DDONET_MVC_TASK.DAL
             {
                 con.Open();
             }
-            SqlCommand cmd = new SqlCommand("select fst_nam,lst_nam,cpny, prf_nam, cnt_id from tbl_Contacts,tbl_Profession where tbl_Contacts.prf_id = tbl_Profession.prf_id and prf_nam like @prfnam", con);
+            SqlCommand cmd = new SqlCommand("select fst_nam,lst_nam,cpny, prf_nam, cnt_id from tbl_Contacts,tbl_Profession where tbl_Contacts.prf_id = tbl_Profession.prf_id and prf_nam like '%' + @prfnam + '%'", con);
             cmd.Parameters.AddWithValue("prfnam", search);
             SqlDataReader dr = cmd.ExecuteReader();
             List<Combine> obj = new List<Combine>();
