@@ -7,6 +7,7 @@ using DDONET_MVC_TASK.DAL;
 using DDONET_MVC_TASK.Models;
 using PagedList;
 using PagedList.Mvc;
+using System.Web.Security;
 
 namespace DDONET_MVC_TASK.Controllers
 {
@@ -40,6 +41,7 @@ namespace DDONET_MVC_TASK.Controllers
             }
         }
         // GET: contacts/Details/5
+  
         public ActionResult Details(int id)
         {
             var aaa = rep.Detail_Rec(id);
@@ -121,6 +123,26 @@ namespace DDONET_MVC_TASK.Controllers
             }
             catch
             {
+                return View();
+            }
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Login() { 
+            return View();
+        }
+        [HttpPost][AllowAnonymous]
+        public ActionResult Login(int id, string pwd)
+        {
+            var aa = rep.login(id, pwd);
+            if (aa == 1)
+            {
+                FormsAuthentication.SetAuthCookie(pwd,false);
+                return RedirectToAction("index", "contacts");
+             
+            }
+            else{
+                TempData["msg"] = "username or password invalid";
                 return View();
             }
         }

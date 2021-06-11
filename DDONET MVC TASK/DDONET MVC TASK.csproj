@@ -140,6 +140,7 @@
     </Compile>
     <Compile Include="Models\clscon.cs" />
     <Compile Include="Models\contacts.cs" />
+    <Compile Include="Models\login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +187,7 @@
     <Content Include="Views\contacts\Edit.cshtml" />
     <Content Include="Views\contacts\Delete.cshtml" />
     <Content Include="Views\contacts\Details.cshtml" />
+    <Content Include="Views\contacts\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

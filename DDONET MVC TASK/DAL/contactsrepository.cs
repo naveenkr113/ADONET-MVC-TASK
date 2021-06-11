@@ -223,11 +223,32 @@ namespace DDONET_MVC_TASK.DAL
 
             }
 
-
             dr.Close();
             cmd.Dispose();
             con.Close();
             return obj;
+        }
+        public int login(int id, string pwd)
+        {
+            if (con.State== ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand cmd = new SqlCommand("select*from tbl_login where id=@id and pwd=@pwd", con);
+            cmd.Parameters.AddWithValue("id", id);
+            cmd.Parameters.AddWithValue("pwd", pwd);
+            IDataReader dr = cmd.ExecuteReader();
+            dr.Read();
+            login aaa = new login();
+            aaa.id =Convert.ToInt32( dr[0]);
+            if (aaa.id == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
         }
 
     }
