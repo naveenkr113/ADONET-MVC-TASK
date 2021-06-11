@@ -8,15 +8,18 @@
 }
 
 <h2>Index</h2>
-
+@if (User.IsInRole("a"))
+{
 <p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>}
 <p>
-    @using (@Html.BeginForm("index", "contacts", FormMethod.Get)) {
-    <b> Search By:</b>@Html.RadioButton("SearchBy", "fst_nam", true) <text>Fist Name</text>
-    @Html.RadioButton("SearchBy", "prf_nam") <text>Profession Name</text> <br />
-    @Html.TextBox("Search") <input type="submit" value="search">
+    @using (@Html.BeginForm("index", "contacts", FormMethod.Get))
+    {
+
+        <b> Search By:</b>@Html.RadioButton("SearchBy", "fst_nam", true) <text>Fist Name</text>
+        @Html.RadioButton("SearchBy", "prf_nam") <text>Profession Name</text> <br />
+        @Html.TextBox("Search") <input type="submit" value="search">
     }
 </p>
 <table class="table">

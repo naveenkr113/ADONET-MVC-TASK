@@ -141,6 +141,7 @@
     <Compile Include="Models\clscon.cs" />
     <Compile Include="Models\contacts.cs" />
     <Compile Include="Models\login.cs" />
+    <Compile Include="MyRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

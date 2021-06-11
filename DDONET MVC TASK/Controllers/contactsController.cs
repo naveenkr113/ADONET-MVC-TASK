@@ -20,6 +20,7 @@ namespace DDONET_MVC_TASK.Controllers
             var aa= rep.Disp_Rec();
             return View(aa.ToList().ToPagedList(page ?? 1, 5));
         } */
+        
         [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get)]
         public ActionResult Index(string searchBy, string search, int? page)
         {
@@ -41,7 +42,7 @@ namespace DDONET_MVC_TASK.Controllers
             }
         }
         // GET: contacts/Details/5
-  
+
         public ActionResult Details(int id)
         {
             var aaa = rep.Detail_Rec(id);
@@ -49,6 +50,9 @@ namespace DDONET_MVC_TASK.Controllers
         }
 
         // GET: contacts/Create
+
+        [Authorize(Roles = "a")]
+
         public ActionResult Create()
         {
             var aa = rep.prof();
@@ -76,6 +80,7 @@ namespace DDONET_MVC_TASK.Controllers
         }
 
         // GET: contacts/Edit/5
+
         public ActionResult Edit(int id)
         {
            var aaa= rep.Find_Rec(id);    
@@ -145,6 +150,12 @@ namespace DDONET_MVC_TASK.Controllers
                 TempData["msg"] = "username or password invalid";
                 return View();
             }
+        }
+        
+        public ActionResult Logout()
+        {
+           FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "contacts");
         }
     }
 }

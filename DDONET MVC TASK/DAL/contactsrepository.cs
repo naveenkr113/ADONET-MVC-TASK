@@ -251,5 +251,21 @@ namespace DDONET_MVC_TASK.DAL
             }
         }
 
+        public string[] Role_Return(string username)
+        {
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand cmd = new SqlCommand("select role from tbl_login where pwd=@pwd", con);
+            cmd.Parameters.AddWithValue("pwd", username);
+            IDataReader dr = cmd.ExecuteReader();
+            dr.Read();
+            string aa = dr[0].ToString();
+            string[] rol = { aa };
+            return rol;
+
+        }
+
     }
 }
